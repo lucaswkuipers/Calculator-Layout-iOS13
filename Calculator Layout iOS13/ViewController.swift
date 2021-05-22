@@ -13,8 +13,19 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+//        setupUI()
     }
 
-
+    @IBOutlet weak var stackview: UIStackView!
+    
+    
+//    func setupUI() {
+//        for subview in stackview.arrangedSubviews {
+//            guard let substack = subview as? UIStackView else { return }
+//            for sub in substack.arrangedSubviews {
+//                print("aaa")
+//            }
+//        }
+//    }
 }
 
