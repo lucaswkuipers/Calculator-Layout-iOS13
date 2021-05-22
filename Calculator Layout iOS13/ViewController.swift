@@ -10,22 +10,28 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var stack: UIStackView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-//        setupUI()
+        roundButtons()
     }
-
-    @IBOutlet weak var stackview: UIStackView!
-    
-    
-//    func setupUI() {
-//        for subview in stackview.arrangedSubviews {
-//            guard let substack = subview as? UIStackView else { return }
-//            for sub in substack.arrangedSubviews {
-//                print("aaa")
-//            }
-//        }
-//    }
+    func roundButtons() {
+        let buttonRows = (stack.arrangedSubviews.filter{$0 is UIStackView}).map{$0 as! UIStackView}
+        for row in buttonRows {
+            for el in row.arrangedSubviews {
+                if el is UIButton {
+                    el.layer.cornerRadius = 0.3 * el.bounds.size.height
+                    el.clipsToBounds = true
+                } else {
+                    let subrow = el as! UIStackView
+                    for subel in subrow.arrangedSubviews {
+                        subel.layer.cornerRadius = 0.3 * subel.bounds.size.height
+                        subel.clipsToBounds = true
+                    }
+                }
+            }
+        }
+    }
 }
 
