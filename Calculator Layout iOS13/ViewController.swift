@@ -14,24 +14,24 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        roundButtons()
+        setupUI()
     }
-    func roundButtons() {
-        let buttonRows = (stack.arrangedSubviews.filter{$0 is UIStackView}).map{$0 as! UIStackView}
-        for row in buttonRows {
-            for el in row.arrangedSubviews {
-                if el is UIButton {
-                    el.layer.cornerRadius = 0.3 * el.bounds.size.height
-                    el.clipsToBounds = true
+    
+    func setupUI() {
+        let stackRows = stack.arrangedSubviews.filter{$0 is UIStackView}.map{$0 as! UIStackView}
+        for row in stackRows {
+            for col in row.arrangedSubviews {
+                let subViewsCount = col.subviews.count
+                if subViewsCount == 1 {
+                    let btn = col.subviews.first
+                    btn?.layer.cornerRadius = 0.45 * btn!.bounds.size.height
                 } else {
-                    let subrow = el as! UIStackView
-                    for subel in subrow.arrangedSubviews {
-                        subel.layer.cornerRadius = 0.3 * subel.bounds.size.height
-                        subel.clipsToBounds = true
+                    for subview in col.subviews {
+                        let btn = subview.subviews.first
+                        btn?.layer.cornerRadius = 0.45 * btn!.bounds.size.height
                     }
                 }
             }
         }
     }
 }
-
